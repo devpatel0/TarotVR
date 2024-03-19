@@ -7,9 +7,12 @@ public class ObjectFloat : MonoBehaviour
 {
     public float speed = 0.5f;
     public float wavelength = 1f;
+    private float initialYPos;
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Initial yPos for cards: " + transform.position.y);
+        initialYPos = transform.position.y;
         
     }
 
@@ -20,6 +23,6 @@ public class ObjectFloat : MonoBehaviour
     }
 
     void calculateFloat() {
-        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * speed) * wavelength, 0f);
+        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * speed) * wavelength + initialYPos, transform.position.z);
     }
 }
