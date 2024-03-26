@@ -827,6 +827,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 378352e93a25c8a4b97a2717025be10b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2080269205}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 378352e93a25c8a4b97a2717025be10b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2080269206}
   m_SourcePrefab: {fileID: 100100000, guid: 378352e93a25c8a4b97a2717025be10b, type: 3}
 --- !u!1 &355057130 stripped
 GameObject:
@@ -1506,6 +1509,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5624543535580069947, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
       propertyPath: m_Name
       value: portal_lowpoly
@@ -1547,6 +1554,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -5624543535580069947, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2022646871}
+    - targetCorrespondingSourceObject: {fileID: -5624543535580069947, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2022646875}
   m_SourcePrefab: {fileID: 100100000, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
 --- !u!4 &765226449 stripped
 Transform:
@@ -3644,6 +3654,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2607347306135948246, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
+--- !u!114 &2022646875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022646867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a013a439252d7184789cba0d6cd2bfdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkedPortal: {fileID: 0}
 --- !u!1001 &2038329026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3754,6 +3777,7 @@ MonoBehaviour:
   linkedPortal: {fileID: 907885332}
   destinationPortal: {fileID: 1397046285}
   grabInteractable: {fileID: 2080269201}
+  portalModel: {fileID: 0}
 --- !u!1 &2080269198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 378352e93a25c8a4b97a2717025be10b, type: 3}
@@ -4038,6 +4062,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe5aee0de2a9b24782477469dd64012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2080269206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080269198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9def9ceacc658f8459348a6367b3f8fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkedPortal: {fileID: 907885332}
+  destinationPortal: {fileID: 0}
+  grabInteractable: {fileID: 2080269201}
+  portalModel: {fileID: 2022646875}
 --- !u!1 &2114897545
 GameObject:
   m_ObjectHideFlags: 0
