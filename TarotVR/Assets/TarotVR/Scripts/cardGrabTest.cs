@@ -10,50 +10,25 @@ public class cardGrabTest : MonoBehaviour
     public portal linkedPortal;
     public portal destinationPortal;
     public XRGrabInteractable grabInteractable; // Reference to the XR Grab Interactable component
-    public portal portalModel;
     // Start is called before the first frame update
     void Start()
     {
         grabInteractable.onSelectEntered.AddListener(HandleGrab); // Add listener for grab event
-        grabInteractable.onSelectExited.AddListener(HandleRelease); // Add listener for release event
-        linkedPortal.gameObject.SetActive(false);
-        portalModel.gameObject.SetActive(false);
-
     }
     void HandleGrab(XRBaseInteractor interactor)
     {
-        // Show the portal when the card is grabbed
-        if(linkedPortal != null)
-        {
-            linkedPortal.gameObject.SetActive(true);
-        }
-        if (portalModel) {
-            portalModel.gameObject.SetActive(true);
-        }
 
-        // traveller playerTraveller = interactor.GetComponentInParent<traveller>();
-        // if (playerTraveller != null && destinationPortal != null && destinationPortal.linkedPortal != null)
-        // {
-        //     // Calculate the teleport destination
-        //     Vector3 destinationPosition = destinationPortal.linkedPortal.transform.position;
-        //     Quaternion destinationRotation = destinationPortal.linkedPortal.transform.rotation;
-
-        //     // Teleport the player
-        //     playerTraveller.teleport(destinationPortal.transform, destinationPortal.linkedPortal.transform, destinationPosition, destinationRotation);
-        // }
-    }
-    void HandleRelease(XRBaseInteractor interactor)
-    {
-        // Hide the portal when the card is released
-        if(linkedPortal != null)
+        traveller playerTraveller = interactor.GetComponentInParent<traveller>();
+        if (playerTraveller != null && destinationPortal != null && destinationPortal.linkedPortal != null)
         {
-            linkedPortal.gameObject.SetActive(false);
-        }
-        if(portalModel) {
-            portalModel.gameObject.SetActive(false);
+            // Calculate the teleport destination
+            Vector3 destinationPosition = destinationPortal.linkedPortal.transform.position;
+            Quaternion destinationRotation = destinationPortal.linkedPortal.transform.rotation;
+
+            // Teleport the player
+            playerTraveller.teleport(destinationPortal.transform, destinationPortal.linkedPortal.transform, destinationPosition, destinationRotation);
         }
     }
-    
     void Test()
     {
         Debug.Log("SELECTED");
@@ -61,7 +36,6 @@ public class cardGrabTest : MonoBehaviour
     void OnDestroy()
     {
         grabInteractable.onSelectEntered.RemoveListener(HandleGrab); // Remove listener to prevent memory leaks
-        grabInteractable.onSelectExited.RemoveListener(HandleRelease); // Remove listener to prevent memory leaks
     }
     // Update is called once per frame
     void Update()
