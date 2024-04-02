@@ -2,42 +2,61 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEditor.Animations;
+using Unity.Mathematics;
+using System;
 public class CardShuffle : MonoBehaviour
 {
-    public float rotationSpeed = 50f; // Speed of rotation
-    public Vector3 rotationPoint = new Vector3(0, 0, 0); // The point around which cards will rotate
-    public float rotationRadius = 5f; 
-    private float angle; 
+    public Vector3 endPosition; // Point where cards will end up after "shuffle"
+    public float cardMoveSpeed = 50f; // Speed of card movement
+    // private Card newCard;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        RotateCardsInCircle();
+        Shuffle();
     }
 
-    void RotateCardsInCircle()
+    // Update is called once per frame
+    void Shuffle()
     {
-        // Calculate the new angle based on the rotation speed and time
-        angle += rotationSpeed * Time.deltaTime;
+        // Pick random card
+        // newCard = randomCard();
 
-        // Ensure the angle wraps around 360 degrees
-        angle %= 360;
+        // Cards shuffle for a few seconds
+        // Cards merge to one position
+        // Other cards are deleted
+            // moveCards();
 
-        // Calculate the new position using the circle formula
-        float x = Mathf.Cos(angle * Mathf.Deg2Rad) * rotationRadius + rotationPoint.x;
-        float z = Mathf.Sin(angle * Mathf.Deg2Rad) * rotationRadius + rotationPoint.z;
+        // Random card is instantiated
+        // instantiate newCard at pos...
 
-        // Update the position of the card
-        transform.position = new Vector3(x, transform.position.y, z);
+        // Sparkles
+    }
 
-        // Optionally, make the card face the direction of movement, comment this out if not needed
-        Vector3 directionOfTravel = (new Vector3(x, transform.position.y, z) - transform.position).normalized;
-        if (directionOfTravel != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(directionOfTravel, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+    // Card randomCard(){
+        // newCard.randomize();
+    // }
+    void moveCards(){
+        // Iterate through all children
+        foreach(Transform child in transform) {
+            // Interpolate it's position to a global position
+            child.transform.position = new Vector3(
+                Mathf.Lerp(child.transform.position.x, endPosition.x, cardMoveSpeed * Time.deltaTime), 
+                Mathf.Lerp(child.transform.position.y, endPosition.y, cardMoveSpeed * Time.deltaTime), 
+                Mathf.Lerp(child.transform.position.z, endPosition.z, cardMoveSpeed * Time.deltaTime)
+            );
         }
 
-        
+        // Delete all child cards after a few seconds
+
+    }
+
+    // void onPlayerEnterSpawnRoom(){
+        // Shuffle();
+    // }
+
+    void Update() {
+        // test for moveCards
+        moveCards();
     }
 }
