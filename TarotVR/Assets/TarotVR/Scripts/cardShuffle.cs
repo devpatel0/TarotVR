@@ -5,58 +5,68 @@ using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.Animations;
 using Unity.Mathematics;
 using System;
+
 public class CardShuffle : MonoBehaviour
 {
     public Vector3 endPosition; // Point where cards will end up after "shuffle"
     public float cardMoveSpeed = 50f; // Speed of card movement
-    // private Card newCard;
+    private GameObject newCard; // Reference to the selected new card
+    public GameObject cardPrefab; // Prefab to instantiate for the newCard
+    public float shuffleDuration = 3f; // Duration of the shuffle before selecting a card
+    private bool isShuffling = false; // Is a shuffle currently happening?
 
     void Start()
     {
         Shuffle();
     }
 
-    // Update is called once per frame
     void Shuffle()
     {
-        // Pick random card
-        // newCard = randomCard();
+        if (isShuffling) return; // Prevent re-entry if shuffle is already happening
 
-        // Cards shuffle for a few seconds
-        // Cards merge to one position
-        // Other cards are deleted
-            // moveCards();
-
-        // Random card is instantiated
-        // instantiate newCard at pos...
-
-        // Sparkles
+        isShuffling = true;
+        StartCoroutine(ShuffleRoutine());
     }
 
-    // Card randomCard(){
-        // newCard.randomize();
-    // }
-    void moveCards(){
-        // Iterate through all children
-        foreach(Transform child in transform) {
-            // Interpolate it's position to a global position
-            child.transform.position = new Vector3(
-                Mathf.Lerp(child.transform.position.x, endPosition.x, cardMoveSpeed * Time.deltaTime), 
-                Mathf.Lerp(child.transform.position.y, endPosition.y, cardMoveSpeed * Time.deltaTime), 
-                Mathf.Lerp(child.transform.position.z, endPosition.z, cardMoveSpeed * Time.deltaTime)
-            );
+    IEnumerator ShuffleRoutine()
+    {
+        // Cards shuffle for a few seconds
+        float startTime = Time.time;
+
+        while (Time.time - startTime < shuffleDuration)
+        {
+            // Keep moving cards until shuffle duration is met
+            moveCards();
+            yield return null;
         }
 
-        // Delete all child cards after a few seconds
+        // Select a random card (for simplicity, this example re-instantiates it at the endPosition)
+        newCard = Instantiate(cardPrefab, endPosition, Quaternion.identity);
 
+        // Sparkles or any other visual effect
+
+        // Delete all child cards
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject != newCard) // Preserve the new card if it's a child; adjust logic as needed
+                Destroy(child.gameObject);
+        }
+
+        isShuffling = false;
     }
 
-    // void onPlayerEnterSpawnRoom(){
-        // Shuffle();
-    // }
+    void moveCards()
+    {
+        // Iterate through all children and interpolate their position to the global endPosition
+        foreach (Transform child in transform)
+        {
+            child.transform.position = Vector3.Lerp(child.transform.position, endPosition, cardMoveSpeed * Time.deltaTime);
+        }
+    }
 
-    void Update() {
-        // test for moveCards
-        moveCards();
+    void Update()
+    {
+        // If you want to continuously test the moveCards method, you can call Shuffle here
+        // But it's better to trigger Shuffle from a specific event (e.g., player action)
     }
 }
