@@ -10,13 +10,16 @@ public class CardShuffle : MonoBehaviour
 {
     public Vector3 endPosition; // Point where cards will end up after "shuffle"
     public float cardMoveSpeed = 50f; // Speed of card movement
-    private GameObject newCard; // Reference to the selected new card
-    public GameObject cardPrefab; // Prefab to instantiate for the newCard
+    // private GameObject newCard; // Reference to the selected new card
+    // public GameObject cardPrefab; // Prefab to instantiate for the newCard
     public float shuffleDuration = 3f; // Duration of the shuffle before selecting a card
     private bool isShuffling = false; // Is a shuffle currently happening?
+    public static CardList cardList;
+    public static GameObject newCard;
 
     void Start()
     {
+        cardList = GameObject.Find("CardList").GetComponent<CardList>();
         Shuffle();
     }
 
@@ -40,17 +43,18 @@ public class CardShuffle : MonoBehaviour
             yield return null;
         }
 
-        // Select a random card (for simplicity, this example re-instantiates it at the endPosition)
-        newCard = Instantiate(cardPrefab, endPosition, Quaternion.identity);
-
-        // Sparkles or any other visual effect
-
         // Delete all child cards
         foreach (Transform child in transform)
         {
-            if (child.gameObject != newCard) // Preserve the new card if it's a child; adjust logic as needed
-                Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
+
+        // Select a random card (for simplicity, this example re-instantiates it at the endPosition)
+        newCard = cardList.Randomize();
+        newCard = Instantiate(newCard, endPosition, Quaternion.identity);
+        newCard.transform.Rotate(0, -90, 0);
+
+        // Sparkles or any other visual effect
 
         isShuffling = false;
     }
