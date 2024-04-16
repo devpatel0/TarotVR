@@ -2349,6 +2349,7 @@ MonoBehaviour:
       y: 0.745356
       z: 0
       w: 0.6666667
+  reshuffle: 1
 --- !u!65 &821333569
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3828,6 +3829,7 @@ MonoBehaviour:
       y: 0.7071068
       z: 0
       w: 0.7071068
+  reshuffle: 0
 --- !u!65 &1779847253
 BoxCollider:
   m_ObjectHideFlags: 0
