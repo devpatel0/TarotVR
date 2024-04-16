@@ -14,11 +14,16 @@ public class CardShuffle : MonoBehaviour
     // public GameObject cardPrefab; // Prefab to instantiate for the newCard
     public float shuffleDuration = 3f; // Duration of the shuffle before selecting a card
     private bool isShuffling = false; // Is a shuffle currently happening?
-    public static CardList cardList;
-    public static GameObject newCard;
+    public static CardList cardList; // List of unique cards in scene (located on empty gameobject cardlist in scene)
+    public static GameObject newCard; // New card returned from random shuffle
+    public GameObject baseCard; // Base card used to reset 10 beginning empty cards
+    public static float spacer = 2.0f; // Spacer to help position base cards
+    public Vector3 baseCardPosition = new Vector3(3.25f,0.5f,14.0f); // Position for start of base cards
+    public static cardGrabTest deactivatePortal; // Used to deactivate portal on newcard when shuffle is reset
 
-    void Start()
+    public void Start()
     {
+        // Find list of unique cards in scene
         cardList = GameObject.Find("CardList").GetComponent<CardList>();
         Shuffle();
     }
@@ -31,8 +36,27 @@ public class CardShuffle : MonoBehaviour
         StartCoroutine(ShuffleRoutine());
     }
 
+    public void Reset() {
+        // Helper for adjusting rotation of instantiated cards
+        float yRot = 90f;
+        // Deactivate previous card's linked portal
+        deactivatePortal = GameObject.Find(newCard.name).GetComponent<cardGrabTest>();
+        deactivatePortal.DeactivatePortal();
+        // Destroy previous card
+        Destroy(newCard);
+        // Instance 10 new base cards in a row
+        for (int i = 1; i < 11; i++) {
+            Vector3 offset = new Vector3(0, 0, spacer * i);
+            Instantiate(baseCard, baseCardPosition - offset, Quaternion.Euler(0,yRot,0), this.transform);
+        }
+        // Call start
+        Start();
+    }
+
     IEnumerator ShuffleRoutine()
     {
+        // Helper for adjusting rotation of instanced card
+        float yRot = -90f;
         // Cards shuffle for a few seconds
         float startTime = Time.time;
 
@@ -51,8 +75,7 @@ public class CardShuffle : MonoBehaviour
 
         // Select a random card (for simplicity, this example re-instantiates it at the endPosition)
         newCard = cardList.Randomize();
-        newCard = Instantiate(newCard, endPosition, Quaternion.identity);
-        newCard.transform.Rotate(0, -90, 0);
+        newCard = Instantiate(newCard, endPosition, Quaternion.Euler(0,yRot,0));
 
         // Sparkles or any other visual effect
 

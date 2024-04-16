@@ -19,9 +19,14 @@ public class respawnCharacter : MonoBehaviour
     {
         
     }
-
+    // When player enters respawn collider
     void OnTriggerEnter(Collider other) {
+        // Teleport player to desired location
         other.transform.position = spawnPoint;
         other.transform.rotation = spawnRotation;
+        // Find card shuffle component
+        CardShuffle cardShuffle = GameObject.Find("Cards").GetComponent<CardShuffle>();
+        // Reset card shuffle
+        cardShuffle.Reset();
     }
 }

@@ -53,6 +53,17 @@ public class cardGrabTest : MonoBehaviour
             portalModel.gameObject.SetActive(false);
         }
     }
+
+    public void DeactivatePortal() {
+        // Hide the portal
+        if(linkedPortal != null)
+        {
+            linkedPortal.gameObject.SetActive(false);
+        }
+        if(portalModel) {
+            portalModel.gameObject.SetActive(false);
+        }
+    }
     
     void Test()
     {
