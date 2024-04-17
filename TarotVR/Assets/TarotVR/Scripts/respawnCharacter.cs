@@ -8,6 +8,7 @@ public class respawnCharacter : MonoBehaviour
 {
     public Vector3 spawnPoint;
     public quaternion spawnRotation;
+    public bool reshuffle;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,16 @@ public class respawnCharacter : MonoBehaviour
     {
         
     }
-
+    // When player enters respawn collider
     void OnTriggerEnter(Collider other) {
+        // Teleport player to desired location
         other.transform.position = spawnPoint;
         other.transform.rotation = spawnRotation;
+        if (reshuffle) {
+            // Find card shuffle component
+            CardShuffle cardShuffle = GameObject.Find("Cards").GetComponent<CardShuffle>();
+            // Reset card shuffle
+            cardShuffle.Reset();
+        }
     }
 }

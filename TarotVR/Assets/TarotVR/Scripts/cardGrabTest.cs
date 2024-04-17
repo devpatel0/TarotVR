@@ -10,7 +10,8 @@ public class cardGrabTest : MonoBehaviour
     public portal linkedPortal;
     public portal destinationPortal;
     public XRGrabInteractable grabInteractable; // Reference to the XR Grab Interactable component
-    public portal portalModel;
+    public GameObject portalModel;
+    public portal removeTraveller;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,21 +31,21 @@ public class cardGrabTest : MonoBehaviour
         if (portalModel) {
             portalModel.gameObject.SetActive(true);
         }
-
-        // traveller playerTraveller = interactor.GetComponentInParent<traveller>();
-        // if (playerTraveller != null && destinationPortal != null && destinationPortal.linkedPortal != null)
-        // {
-        //     // Calculate the teleport destination
-        //     Vector3 destinationPosition = destinationPortal.linkedPortal.transform.position;
-        //     Quaternion destinationRotation = destinationPortal.linkedPortal.transform.rotation;
-
-        //     // Teleport the player
-        //     playerTraveller.teleport(destinationPortal.transform, destinationPortal.linkedPortal.transform, destinationPosition, destinationRotation);
-        // }
     }
     void HandleRelease(XRBaseInteractor interactor)
     {
         // Hide the portal when the card is released
+        if(linkedPortal != null)
+        {
+            linkedPortal.gameObject.SetActive(false);
+        }
+        if(portalModel) {
+            portalModel.gameObject.SetActive(false);
+        }
+    }
+
+    public void DeactivatePortal() {
+        // Hide the portal
         if(linkedPortal != null)
         {
             linkedPortal.gameObject.SetActive(false);
