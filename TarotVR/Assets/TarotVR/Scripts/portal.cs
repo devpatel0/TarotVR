@@ -1,3 +1,5 @@
+// Logic/Code adapted from Sebastian Lague: https://github.com/SebLague/Portals
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,9 +10,9 @@ public class portal : MonoBehaviour
 {
     [Header ("Settings")]
     public portal linkedPortal;
-
     private Camera xrCamera;
-    private List<traveller> trackedTravellers; 
+    public List<traveller> trackedTravellers; 
+    public bool reshuffle;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,14 @@ public class portal : MonoBehaviour
                 // graphics clone?
                 linkedPortal.onTravellerEnterPortal(portalTraveller);
                 trackedTravellers.RemoveAt(i);
+                // If portal returns to spawn, re shuffle
+                if (reshuffle) {
+                    linkedPortal.trackedTravellers.Remove(portalTraveller);
+                    // Find card shuffle component
+                    CardShuffle cardShuffle = GameObject.Find("Cards").GetComponent<CardShuffle>();
+                    // Reset card shuffle
+                    cardShuffle.Reset();
+                }
                 i--;
             } else {
                 portalTraveller.previousOffsetFromPortal = portalOffset;

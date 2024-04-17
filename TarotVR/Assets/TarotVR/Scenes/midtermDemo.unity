@@ -922,7 +922,8 @@ MonoBehaviour:
   linkedPortal: {fileID: 907885332}
   destinationPortal: {fileID: 0}
   grabInteractable: {fileID: 351171955}
-  portalModel: {fileID: 2022646876}
+  portalModel: {fileID: 2022646867}
+  removeTraveller: {fileID: 0}
 --- !u!64 &351171953
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1834,6 +1835,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5624543535580069947, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
+      propertyPath: m_Name
+      value: PortalModel
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
       propertyPath: m_Name
       value: portal_lowpoly
@@ -1875,9 +1880,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -5624543535580069947, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2022646871}
-    - targetCorrespondingSourceObject: {fileID: -5624543535580069947, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2022646876}
   m_SourcePrefab: {fileID: 100100000, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
 --- !u!4 &765226449 stripped
 Transform:
@@ -2071,6 +2073,7 @@ MonoBehaviour:
   destinationPortal: {fileID: 0}
   grabInteractable: {fileID: 803311588}
   portalModel: {fileID: 0}
+  removeTraveller: {fileID: 0}
 --- !u!64 &803311586
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2530,7 +2533,7 @@ GameObject:
   - component: {fileID: 907885333}
   - component: {fileID: 907885332}
   m_Layer: 0
-  m_Name: emptyPortal
+  m_Name: sPortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2564,6 +2567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 1397046285}
+  trackedTravellers: []
+  reshuffle: 0
 --- !u!65 &907885333
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2698,6 +2703,14 @@ PrefabInstance:
     - target: {fileID: 7313654230448209575, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_Name
       value: XR Interaction Setup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696548424635294048, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696548424635294048, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7696548424635294051, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3685,6 +3698,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 907885332}
+  trackedTravellers: []
+  reshuffle: 0
 --- !u!65 &1397046286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4277,6 +4292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 907885332}
+  trackedTravellers: []
+  reshuffle: 1
 --- !u!65 &1941960656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4398,19 +4415,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2607347306135948246, guid: 95977ecbce1395146949206f57adf0a6, type: 3}
---- !u!114 &2022646876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022646867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a013a439252d7184789cba0d6cd2bfdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linkedPortal: {fileID: 0}
 --- !u!1 &2114897545
 GameObject:
   m_ObjectHideFlags: 0

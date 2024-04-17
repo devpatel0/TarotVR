@@ -15,7 +15,7 @@ public class CardShuffle : MonoBehaviour
     public float shuffleDuration = 3f; // Duration of the shuffle before selecting a card
     private bool isShuffling = false; // Is a shuffle currently happening?
     public static CardList cardList; // List of unique cards in scene (located on empty gameobject cardlist in scene)
-    public static GameObject newCard; // New card returned from random shuffle
+    public static GameObject newCard;// New card returned from random shuffle
     public GameObject baseCard; // Base card used to reset 10 beginning empty cards
     public static float spacer = 2.0f; // Spacer to help position base cards
     public Vector3 baseCardPosition = new Vector3(3.25f,0.5f,14.0f); // Position for start of base cards
@@ -37,20 +37,22 @@ public class CardShuffle : MonoBehaviour
     }
 
     public void Reset() {
-        // Helper for adjusting rotation of instantiated cards
-        float yRot = 90f;
-        // Deactivate previous card's linked portal
-        deactivatePortal = GameObject.Find(newCard.name).GetComponent<cardGrabTest>();
-        deactivatePortal.DeactivatePortal();
-        // Destroy previous card
-        Destroy(newCard);
-        // Instance 10 new base cards in a row
-        for (int i = 1; i < 11; i++) {
-            Vector3 offset = new Vector3(0, 0, spacer * i);
-            Instantiate(baseCard, baseCardPosition - offset, Quaternion.Euler(0,yRot,0), this.transform);
+        if (newCard) {
+            // Helper for adjusting rotation of instantiated cards
+            float yRot = 90f;
+            // Deactivate previous card's linked portal
+            deactivatePortal = GameObject.Find(newCard.name).GetComponent<cardGrabTest>();
+            deactivatePortal.DeactivatePortal();
+            // Destroy previous card
+            Destroy(newCard);
+            // Instance 10 new base cards in a row
+            for (int i = 1; i < 11; i++) {
+                Vector3 offset = new Vector3(0, 0, spacer * i);
+                Instantiate(baseCard, baseCardPosition - offset, Quaternion.Euler(0,yRot,0), this.transform);
+            }
+            // Call start
+            this.Start();
         }
-        // Call start
-        Start();
     }
 
     IEnumerator ShuffleRoutine()
