@@ -8,7 +8,7 @@ public class cardGrabTest : MonoBehaviour
 {
     [Header("Settings")]
     public portal linkedPortal;
-    public portal destinationPortal;
+    public Animator portalEffect;
     public XRGrabInteractable grabInteractable; // Reference to the XR Grab Interactable component
     public GameObject portalModel;
     // Start is called before the first frame update
@@ -18,6 +18,7 @@ public class cardGrabTest : MonoBehaviour
         grabInteractable.onSelectExited.AddListener(HandleRelease); // Add listener for release event
         linkedPortal.gameObject.SetActive(false);
         portalModel.gameObject.SetActive(false);
+        portalEffect.gameObject.SetActive(false);
 
     }
     void HandleGrab(XRBaseInteractor interactor)
@@ -30,6 +31,9 @@ public class cardGrabTest : MonoBehaviour
         if (portalModel) {
             portalModel.gameObject.SetActive(true);
         }
+        if (portalEffect) {
+            portalEffect.gameObject.SetActive(true);
+        }
     }
     void HandleRelease(XRBaseInteractor interactor)
     {
@@ -41,6 +45,9 @@ public class cardGrabTest : MonoBehaviour
         if(portalModel) {
             portalModel.gameObject.SetActive(false);
         }
+        if (portalEffect) {
+            portalEffect.gameObject.SetActive(false);
+        }
     }
 
     public void DeactivatePortal() {
@@ -51,6 +58,9 @@ public class cardGrabTest : MonoBehaviour
         }
         if(portalModel) {
             portalModel.gameObject.SetActive(false);
+        }
+        if (portalEffect) {
+            portalEffect.gameObject.SetActive(false);
         }
     }
     
