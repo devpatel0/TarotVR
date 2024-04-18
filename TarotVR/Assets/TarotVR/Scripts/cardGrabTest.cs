@@ -11,6 +11,7 @@ public class cardGrabTest : MonoBehaviour
     public portal destinationPortal;
     public XRGrabInteractable grabInteractable; // Reference to the XR Grab Interactable component
     public GameObject portalModel;
+    public portal removeTraveller;
     // Start is called before the first frame update
     void Start()
     {
