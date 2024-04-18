@@ -8,21 +8,21 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__lambert2
-    second: {fileID: 8368722655750445499, guid: e777e6fb81d299c4f857dd40736eb5c3, type: 3}
+    second: {fileID: 2100000, guid: 8979d7f224d97a7469e29cc2b8c6d14e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__lambert3
-    second: {fileID: 8368722655750445499, guid: e777e6fb81d299c4f857dd40736eb5c3, type: 3}
+    second: {fileID: 2100000, guid: 8979d7f224d97a7469e29cc2b8c6d14e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__lambert4
-    second: {fileID: 8368722655750445499, guid: e777e6fb81d299c4f857dd40736eb5c3, type: 3}
+    second: {fileID: 2100000, guid: 8979d7f224d97a7469e29cc2b8c6d14e, type: 2}
   materials:
     materialImportMode: 2
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 0
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
