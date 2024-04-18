@@ -7,11 +7,12 @@ public class CardList : MonoBehaviour
 {
     public GameObject theFool;
     public GameObject theMagician;
+    public GameObject theEmpress;
     static public List<GameObject> cards;
     static public Vector3 instancePos = new Vector3(0, -5, 0);
 
     public void Start() {
-        cards = new List<GameObject>() {theFool, theMagician};
+        cards = new List<GameObject>() {theFool, theMagician, theEmpress};
     }
 
     public GameObject Randomize() {
